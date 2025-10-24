@@ -1,98 +1,446 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# ROI Calculator API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+<div align="center">
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+[![NestJS](https://img.shields.io/badge/NestJS-11.x-E0234E?logo=nestjs)](https://nestjs.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript)](https://www.typescriptlang.org/)
+[![Prisma](https://img.shields.io/badge/Prisma-6.x-2D3748?logo=prisma)](https://www.prisma.io/)
+[![Jest](https://img.shields.io/badge/Jest-29.x-C21325?logo=jest)](https://jestjs.io/)
 
-## Description
+NestJS backend API for the Serverless ROI Calculator application.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+[Features](#features) • [Getting Started](#getting-started) • [API Documentation](#api-documentation) • [Testing](#testing)
 
-## Project setup
+</div>
 
-```bash
-$ pnpm install
+---
+
+## 🎯 Features
+
+- ✅ **RESTful API** - Well-structured REST endpoints
+- ✅ **Type-Safe** - Full TypeScript with strict mode
+- ✅ **Database ORM** - Prisma for type-safe database access
+- ✅ **Validation** - Request validation with class-validator
+- ✅ **Security** - Helmet, CORS, rate limiting
+- ✅ **Logging** - Structured logging with Pino
+- ✅ **Health Checks** - Liveness and readiness probes
+- ✅ **API Docs** - Auto-generated Swagger/OpenAPI documentation
+- ✅ **Testing** - Unit and E2E tests with Jest
+- ✅ **Code Quality** - ESLint with TypeScript rules
+
+## 🏗️ Architecture
+
+```
+src/
+├── common/              # Shared utilities
+│   ├── filters/         # Exception filters
+│   ├── guards/          # Auth and role guards
+│   ├── interceptors/    # Request/response interceptors
+│   ├── middlewares/     # Custom middleware
+│   └── pipes/           # Validation pipes
+├── config/              # Configuration management
+├── health/              # Health check endpoints
+├── prisma/              # Prisma ORM setup
+├── app.controller.ts    # Root controller
+├── app.module.ts        # Root module
+├── app.service.ts       # Root service
+└── main.ts              # Application entry point
 ```
 
-## Compile and run the project
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js >= 18.0.0
+- pnpm >= 8.0.0
+- PostgreSQL database
+
+### Installation
 
 ```bash
-# development
-$ pnpm run start
+# Install dependencies (from project root)
+pnpm install
 
-# watch mode
-$ pnpm run start:dev
-
-# production mode
-$ pnpm run start:prod
+# Or install only API dependencies
+pnpm --filter @repo/api install
 ```
 
-## Run tests
+### Environment Variables
+
+Create a `.env` file in the `apps/api` directory:
+
+```env
+# Application
+NODE_ENV=development
+PORT=3000
+API_PREFIX=api
+
+# CORS
+CORS_ORIGIN=http://localhost:5173
+
+# Database
+DATABASE_URL="postgresql://user:password@localhost:5432/roi_calculator?schema=public"
+
+# Logging
+LOG_LEVEL=debug
+```
+
+See `.env.example` for all available options.
+
+### Database Setup
 
 ```bash
-# unit tests
-$ pnpm run test
+# Generate Prisma Client
+pnpm prisma generate
 
-# e2e tests
-$ pnpm run test:e2e
+# Run migrations
+pnpm prisma migrate dev
 
-# test coverage
-$ pnpm run test:cov
+# Seed database (if seed script exists)
+pnpm prisma db seed
+
+# Open Prisma Studio (database GUI)
+pnpm prisma studio
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### Development
 
 ```bash
-$ pnpm install -g @nestjs/mau
-$ mau deploy
+# Start in development mode (with watch)
+pnpm dev
+
+# Start in debug mode
+pnpm start:debug
+
+# View logs
+# Logs are output to console with pino-pretty in development
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+The API will be available at:
+- **API**: http://localhost:3000/api
+- **Swagger Docs**: http://localhost:3000/api/docs
+- **Health Check**: http://localhost:3000/api/health
 
-## Resources
+## 📖 API Documentation
 
-Check out a few resources that may come in handy when working with NestJS:
+### Swagger/OpenAPI
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+Interactive API documentation is automatically generated and available at:
 
-## Support
+**http://localhost:3000/api/docs**
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+The Swagger UI provides:
+- Complete API endpoint documentation
+- Request/response schemas
+- Try-it-out functionality
+- Example requests and responses
 
-## Stay in touch
+### Health Endpoints
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+#### GET `/api/health`
 
-## License
+Complete health check including:
+- Database connectivity
+- Memory usage
+- Disk space
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+**Response:**
+```json
+{
+  "status": "ok",
+  "info": {
+    "database": { "status": "up" },
+    "memory_heap": { "status": "up" },
+    "memory_rss": { "status": "up" },
+    "disk": { "status": "up" }
+  }
+}
+```
+
+#### GET `/api/health/liveness`
+
+Simple liveness probe for Kubernetes/container orchestration.
+
+**Response:**
+```json
+{
+  "status": "ok",
+  "timestamp": "2024-01-01T00:00:00.000Z",
+  "uptime": 123.456
+}
+```
+
+#### GET `/api/health/readiness`
+
+Readiness probe checking critical dependencies.
+
+**Response:**
+```json
+{
+  "status": "ok",
+  "info": {
+    "database": { "status": "up" }
+  }
+}
+```
+
+## 🧪 Testing
+
+### Unit Tests
+
+```bash
+# Run all unit tests
+pnpm test
+
+# Run tests in watch mode
+pnpm test:watch
+
+# Run tests with coverage
+pnpm test:cov
+```
+
+### E2E Tests
+
+```bash
+# Run E2E tests
+pnpm test:e2e
+
+# Run E2E tests with coverage
+pnpm test:e2e:cov
+```
+
+### Test Coverage
+
+Coverage reports are generated in the `coverage/` directory.
+
+```bash
+pnpm test:cov
+# Open coverage/lcov-report/index.html
+```
+
+## 🏗️ Building
+
+### Development Build
+
+```bash
+pnpm build
+```
+
+Output in `dist/` directory.
+
+### Production Build
+
+```bash
+NODE_ENV=production pnpm build
+```
+
+### Run Production Build
+
+```bash
+pnpm start:prod
+```
+
+## 🔒 Security Features
+
+### Helmet
+
+Security headers are configured via Helmet:
+- Content Security Policy
+- X-Frame-Options
+- X-Content-Type-Options
+- And more...
+
+### Rate Limiting
+
+Built-in rate limiting with `@nestjs/throttler`:
+- Default: 100 requests per minute per IP
+- Configurable per route with decorators
+
+### CORS
+
+CORS is configured to allow requests from the frontend:
+```typescript
+app.enableCors({
+  origin: process.env.CORS_ORIGIN,
+  credentials: true,
+});
+```
+
+### Input Validation
+
+All DTOs use class-validator decorators:
+```typescript
+export class CreateUserDto {
+  @IsEmail()
+  email: string;
+
+  @IsString()
+  @MinLength(2)
+  name: string;
+}
+```
+
+## 📊 Logging
+
+Structured logging with Pino:
+
+```typescript
+// In development: pretty-printed colored logs
+// In production: JSON structured logs
+
+this.logger.log('User created', { userId: user.id });
+this.logger.error('Failed to create user', error.stack);
+```
+
+### Log Levels
+
+- `fatal` - Critical errors
+- `error` - Errors
+- `warn` - Warnings
+- `info` - Informational (production default)
+- `debug` - Debug information (development default)
+- `trace` - Verbose tracing
+
+## 🛠️ Development Tools
+
+### Code Quality
+
+```bash
+# Lint code
+pnpm lint
+
+# Auto-fix linting issues
+pnpm lint --fix
+
+# Format code
+pnpm format
+```
+
+### Database Tools
+
+```bash
+# View database in browser
+pnpm prisma studio
+
+# Reset database
+pnpm prisma migrate reset
+
+# Generate migration
+pnpm prisma migrate dev --name migration_name
+
+# View migration status
+pnpm prisma migrate status
+```
+
+## 📦 Dependencies
+
+### Core Dependencies
+
+- `@nestjs/common` - NestJS core
+- `@nestjs/core` - NestJS runtime
+- `@nestjs/platform-express` - Express adapter
+- `@prisma/client` - Prisma ORM client
+- `typescript` - TypeScript compiler
+
+### Feature Dependencies
+
+- `@nestjs/config` - Configuration management
+- `@nestjs/swagger` - API documentation
+- `@nestjs/terminus` - Health checks
+- `@nestjs/throttler` - Rate limiting
+- `class-validator` - Validation
+- `class-transformer` - Object transformation
+- `helmet` - Security headers
+- `nestjs-pino` - Logging
+
+### Development Dependencies
+
+- `@nestjs/cli` - NestJS CLI
+- `@nestjs/testing` - Testing utilities
+- `jest` - Testing framework
+- `supertest` - HTTP assertions
+- `prisma` - Prisma CLI
+- `eslint` - Linting
+- `typescript-eslint` - TypeScript linting rules
+
+## 🚀 Deployment
+
+### Docker
+
+```bash
+# Build image
+docker build -t roi-calculator-api .
+
+# Run container
+docker run -p 3000:3000 \
+  -e DATABASE_URL="postgresql://..." \
+  roi-calculator-api
+```
+
+### Production Checklist
+
+- ✅ Set `NODE_ENV=production`
+- ✅ Configure production database
+- ✅ Set up environment variables
+- ✅ Run database migrations
+- ✅ Build the application
+- ✅ Set up process manager (PM2, systemd)
+- ✅ Configure reverse proxy (nginx)
+- ✅ Set up SSL/TLS
+- ✅ Configure monitoring and logging
+- ✅ Set up health check endpoints
+
+## 🔧 Configuration
+
+Configuration is managed via `@nestjs/config` with schema validation.
+
+**Location**: `src/config/configuration.ts`
+
+```typescript
+export const configuration = () => ({
+  port: parseInt(process.env.PORT, 10) || 3000,
+  database: {
+    url: process.env.DATABASE_URL,
+  },
+  cors: {
+    origin: process.env.CORS_ORIGIN || '*',
+  },
+});
+```
+
+Access config in services:
+
+```typescript
+constructor(private configService: ConfigService) {
+  const port = this.configService.get<number>('port');
+}
+```
+
+## 📚 Additional Resources
+
+- [NestJS Documentation](https://docs.nestjs.com/)
+- [Prisma Documentation](https://www.prisma.io/docs)
+- [TypeScript Handbook](https://www.typescriptlang.org/docs/)
+- [Jest Documentation](https://jestjs.io/docs/getting-started)
+
+## 🤝 Contributing
+
+See the main [Contributing Guide](../../CONTRIBUTING.md) for details.
+
+### API-Specific Guidelines
+
+1. Follow NestJS best practices
+2. Use DTOs for all request/response objects
+3. Add Swagger decorators to all endpoints
+4. Write tests for all new features
+5. Follow the existing code structure
+6. Use dependency injection
+7. Keep controllers thin, services fat
+
+## 📝 License
+
+MIT - See [LICENSE](../../LICENSE) file for details.
+
+---
+
+Part of the [Serverless ROI Calculator](../../README.md) project.

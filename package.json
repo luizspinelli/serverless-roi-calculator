@@ -2,7 +2,7 @@
   "name": "serverless-roi-calculator",
   "version": "1.0.0",
   "private": true,
-  "description": "Serverless ROI Calculator - Full Stack Application",
+  "description": "A modern, full-stack monorepo application for calculating and analyzing serverless architecture ROI",
   "scripts": {
     "dev": "pnpm --parallel -r dev",
     "build": "pnpm -r build",
@@ -13,9 +13,25 @@
   "keywords": [
     "monorepo",
     "serverless",
-    "roi-calculator"
+    "roi-calculator",
+    "nestjs",
+    "react",
+    "typescript",
+    "prisma",
+    "vite"
   ],
-  "author": "",
+  "author": {
+    "name": "Luiz Spinelli",
+    "url": "https://spinelli.dev.br/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/luizspinelli/serverless-roi-calculator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/luizspinelli/serverless-roi-calculator/issues"
+  },
+  "homepage": "https://github.com/luizspinelli/serverless-roi-calculator#readme",
   "license": "MIT",
   "engines": {
     "node": ">=18.0.0",
