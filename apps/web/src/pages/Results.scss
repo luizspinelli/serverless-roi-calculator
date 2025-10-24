@@ -1,0 +1,143 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.results {
+  &-header {
+    text-align: center;
+    margin-bottom: $spacing-3xl;
+    position: relative;
+
+    h1 {
+      font-size: $font-3xl;
+      color: $text-primary;
+      margin-bottom: $spacing-md;
+    }
+
+    p {
+      font-size: $font-lg;
+      color: $text-secondary;
+    }
+  }
+
+  &-empty {
+    text-align: center;
+    padding: $spacing-3xl;
+
+    h2 {
+      font-size: $font-2xl;
+      color: $text-primary;
+      margin-bottom: $spacing-md;
+    }
+
+    p {
+      color: $text-secondary;
+      margin-bottom: $spacing-xl;
+    }
+
+    .btn-primary {
+      @include button-reset;
+      @include flex-center;
+      gap: $spacing-sm;
+      padding: $spacing-md $spacing-xl;
+      background-color: $color-primary;
+      color: $color-white;
+      border-radius: $radius-md;
+      font-weight: $font-medium;
+      @include transition(background-color);
+
+      &:hover {
+        background-color: $color-primary-dark;
+      }
+    }
+  }
+
+  &-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: $spacing-lg;
+    margin-bottom: $spacing-3xl;
+  }
+
+  &-actions {
+    @include flex-center;
+    gap: $spacing-lg;
+
+    button {
+      @include button-reset;
+      @include flex-center;
+      gap: $spacing-sm;
+      padding: $spacing-md $spacing-xl;
+      border-radius: $radius-md;
+      font-weight: $font-medium;
+      @include transition(all);
+    }
+
+    .btn-secondary {
+      background-color: $bg-secondary;
+      color: $text-primary;
+      border: 1px solid $color-gray-300;
+
+      &:hover {
+        background-color: $bg-tertiary;
+      }
+    }
+  }
+}
+
+.metric-card {
+  @include card;
+  text-align: center;
+  @include transition(transform);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-lg;
+  }
+
+  &.highlight {
+    border: 2px solid $color-secondary;
+  }
+
+  h3 {
+    font-size: $font-base;
+    font-weight: $font-medium;
+    color: $text-secondary;
+    margin-bottom: $spacing-sm;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .metric-value {
+    font-size: $font-4xl;
+    font-weight: $font-bold;
+    color: $text-primary;
+    margin-bottom: $spacing-xs;
+
+    &.savings {
+      color: $color-secondary;
+    }
+  }
+
+  .metric-label {
+    font-size: $font-sm;
+    color: $text-muted;
+  }
+}
+
+.btn-back {
+  @include button-reset;
+  @include flex-center;
+  gap: $spacing-sm;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: $spacing-sm $spacing-md;
+  color: $text-secondary;
+  border-radius: $radius-md;
+  @include transition(all);
+
+  &:hover {
+    background-color: $bg-secondary;
+    color: $text-primary;
+  }
+}

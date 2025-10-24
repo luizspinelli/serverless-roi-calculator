@@ -1,0 +1,15 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.scenarios {
+  h1 {
+    font-size: $font-3xl;
+    color: $text-primary;
+    margin-bottom: $spacing-md;
+  }
+
+  p {
+    color: $text-secondary;
+    margin-bottom: $spacing-xl;
+  }
+}

@@ -1,0 +1,66 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.error-boundary {
+  @include flex-center;
+  min-height: 100vh;
+  padding: $spacing-xl;
+  background-color: $bg-secondary;
+
+  &-content {
+    max-width: 600px;
+    text-align: center;
+    background: $bg-primary;
+    padding: $spacing-3xl;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-lg;
+
+    h1 {
+      font-size: $font-3xl;
+      color: $color-danger;
+      margin-bottom: $spacing-md;
+    }
+
+    p {
+      color: $text-secondary;
+      margin-bottom: $spacing-xl;
+    }
+  }
+
+  &-button {
+    @include button-reset;
+    background-color: $color-primary;
+    color: $color-white;
+    padding: $spacing-md $spacing-xl;
+    border-radius: $radius-md;
+    font-weight: $font-medium;
+    @include transition(background-color);
+
+    &:hover {
+      background-color: $color-primary-dark;
+    }
+  }
+}
+
+.error-details {
+  margin: $spacing-lg 0;
+  text-align: left;
+  background-color: $bg-secondary;
+  padding: $spacing-md;
+  border-radius: $radius-md;
+
+  summary {
+    cursor: pointer;
+    font-weight: $font-medium;
+    color: $text-primary;
+    margin-bottom: $spacing-sm;
+  }
+
+  pre {
+    font-size: $font-sm;
+    color: $color-danger;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+}

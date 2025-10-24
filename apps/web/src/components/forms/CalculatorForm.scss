@@ -1,0 +1,115 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.calculator-form {
+  max-width: 600px;
+  margin: 0 auto;
+
+  .form-group {
+    margin-bottom: $spacing-xl;
+
+    label {
+      display: block;
+      font-weight: $font-medium;
+      color: $text-primary;
+      margin-bottom: $spacing-sm;
+
+      .required {
+        color: $color-danger;
+        margin-left: $spacing-xs;
+      }
+    }
+
+    input {
+      width: 100%;
+      padding: $spacing-md;
+      border: 1px solid $color-gray-300;
+      border-radius: $radius-md;
+      font-size: $font-base;
+      @include transition(border-color);
+
+      &:focus {
+        outline: none;
+        border-color: $color-primary;
+      }
+
+      &.error {
+        border-color: $color-danger;
+      }
+
+      &:disabled {
+        background-color: $bg-secondary;
+        cursor: not-allowed;
+      }
+    }
+
+    .help-text {
+      display: block;
+      font-size: $font-sm;
+      color: $text-muted;
+      margin-top: $spacing-xs;
+    }
+
+    .error-message {
+      display: block;
+      color: $color-danger;
+      font-size: $font-sm;
+      margin-top: $spacing-xs;
+    }
+  }
+
+  .form-error {
+    padding: $spacing-md;
+    background-color: rgba($color-danger, 0.1);
+    border: 1px solid $color-danger;
+    border-radius: $radius-md;
+    color: $color-danger;
+    margin-bottom: $spacing-lg;
+
+    strong {
+      font-weight: $font-semibold;
+    }
+  }
+
+  .form-actions {
+    @include flex-between;
+    gap: $spacing-md;
+
+    button {
+      @include button-reset;
+      padding: $spacing-md $spacing-xl;
+      border-radius: $radius-md;
+      font-weight: $font-medium;
+      font-size: $font-base;
+      @include transition(all);
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+    }
+
+    .btn-primary {
+      background-color: $color-primary;
+      color: $color-white;
+      flex: 1;
+
+      &:hover:not(:disabled) {
+        background-color: $color-primary-dark;
+      }
+    }
+
+    .btn-secondary {
+      background-color: $bg-secondary;
+      color: $text-primary;
+      border: 1px solid $color-gray-300;
+
+      &:hover:not(:disabled) {
+        background-color: $bg-tertiary;
+      }
+    }
+  }
+}
