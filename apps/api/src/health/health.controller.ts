@@ -32,7 +32,7 @@ export class HealthController {
   check() {
     return this.health.check([
       // Database health
-      () => this.prismaIndicator.pingCheck('database', this.prisma),
+      () => this.prismaIndicator.pingCheck('database', this.prisma as any),
 
       // Memory health (heap should not exceed 150MB)
       () => this.memory.checkHeap('memory_heap', 150 * 1024 * 1024),
@@ -67,7 +67,7 @@ export class HealthController {
   @ApiResponse({ status: 503, description: 'Application is not ready' })
   getReadiness() {
     return this.health.check([
-      () => this.prismaIndicator.pingCheck('database', this.prisma),
+      () => this.prismaIndicator.pingCheck('database', this.prisma as any),
     ])
   }
 }

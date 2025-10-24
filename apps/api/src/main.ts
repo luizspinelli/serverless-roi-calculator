@@ -28,7 +28,7 @@ async function bootstrap() {
   logger.log(`CORS enabled for origin: ${corsOrigin}`)
 
   // Global Prefix
-  const apiPrefix = configService.get<string>('api.prefix')
+  const apiPrefix = configService.get<string>('api.prefix') || 'api'
   app.setGlobalPrefix(apiPrefix)
 
   // Global Exception Filter
@@ -59,7 +59,7 @@ async function bootstrap() {
   logger.log('Swagger documentation available at /api/docs')
 
   // Start Server
-  const port = configService.get<number>('port')
+  const port = configService.get<number>('port') || 3000
   await app.listen(port)
   logger.log(`🚀 Application is running on: http://localhost:${port}/${apiPrefix}`)
   logger.log(`📚 Swagger docs: http://localhost:${port}/api/docs`)
