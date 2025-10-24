@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { calculateROI, CalculationInput } from '@/services'
+import { calculateROI } from '@/services'
+import type { CalculationInput } from '@/services'
 import { useCalculation } from '@/contexts/CalculationContext'
 import { showToast } from '@/utils'
 

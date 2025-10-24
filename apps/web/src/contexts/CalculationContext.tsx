@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, ReactNode } from 'react'
-import { CalculationInput, CalculationResult } from '@/services'
+import type { CalculationResult } from '@/services'
 
 interface CalculationContextType {
   currentCalculation: CalculationResult | null
