@@ -1,5 +1,5 @@
-import { Controller, Get } from '@nestjs/common'
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger'
+import { Controller, Get } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import {
   HealthCheck,
   HealthCheckService,
@@ -7,9 +7,10 @@ import {
   PrismaHealthIndicator,
   MemoryHealthIndicator,
   DiskHealthIndicator,
-} from '@nestjs/terminus'
-import { SkipThrottle } from '@nestjs/throttler'
-import { PrismaService } from '../prisma/prisma.service'
+} from '@nestjs/terminus';
+import { SkipThrottle } from '@nestjs/throttler';
+import { PrismaClient } from '@prisma/client';
+import { PrismaService } from '../prisma/prisma.service';
 
 @ApiTags('health')
 @Controller('health')
@@ -32,7 +33,9 @@ export class HealthController {
   check() {
     return this.health.check([
       // Database health
-      () => this.prismaIndicator.pingCheck('database', this.prisma as any),
+
+      () =>
+        this.prismaIndicator.pingCheck('database', this.prisma as PrismaClient),
 
       // Memory health (heap should not exceed 150MB)
       () => this.memory.checkHeap('memory_heap', 150 * 1024 * 1024),
@@ -46,7 +49,7 @@ export class HealthController {
           path: '/',
           thresholdPercent: 0.5,
         }),
-    ])
+    ]);
   }
 
   @Get('liveness')
@@ -57,17 +60,20 @@ export class HealthController {
       status: 'ok',
       timestamp: new Date().toISOString(),
       uptime: process.uptime(),
-    }
+    };
   }
 
   @Get('readiness')
   @HealthCheck()
-  @ApiOperation({ summary: 'Readiness probe - Is the application ready to serve traffic?' })
+  @ApiOperation({
+    summary: 'Readiness probe - Is the application ready to serve traffic?',
+  })
   @ApiResponse({ status: 200, description: 'Application is ready' })
   @ApiResponse({ status: 503, description: 'Application is not ready' })
   getReadiness() {
     return this.health.check([
-      () => this.prismaIndicator.pingCheck('database', this.prisma as any),
-    ])
+      () =>
+        this.prismaIndicator.pingCheck('database', this.prisma as PrismaClient),
+    ]);
   }
 }

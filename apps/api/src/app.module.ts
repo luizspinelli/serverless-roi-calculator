@@ -1,13 +1,15 @@
-import { Module } from '@nestjs/common'
-import { ConfigModule } from '@nestjs/config'
-import { LoggerModule } from 'nestjs-pino'
-import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler'
-import { APP_GUARD } from '@nestjs/core'
-import { AppController } from './app.controller'
-import { AppService } from './app.service'
-import { configuration } from './config'
-import { PrismaModule } from './prisma/prisma.module'
-import { HealthModule } from './health/health.module'
+import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { LoggerModule } from 'nestjs-pino';
+import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
+import { APP_GUARD } from '@nestjs/core';
+import { Request } from 'express';
+import { ServerResponse } from 'http';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { configuration } from './config';
+import { PrismaModule } from './prisma/prisma.module';
+import { HealthModule } from './health/health.module';
 
 @Module({
   imports: [
@@ -38,12 +40,12 @@ import { HealthModule } from './health/health.module'
             : undefined,
         level: process.env.NODE_ENV !== 'production' ? 'debug' : 'info',
         serializers: {
-          req: (req) => ({
+          req: (req: Request) => ({
             id: req.id,
             method: req.method,
             url: req.url,
           }),
-          res: (res) => ({
+          res: (res: ServerResponse) => ({
             statusCode: res.statusCode,
           }),
         },

@@ -15,4 +15,4 @@ export default () => ({
     secret: process.env.JWT_SECRET || 'default-secret',
     expiresIn: process.env.JWT_EXPIRATION || '1d',
   },
-})
+});
