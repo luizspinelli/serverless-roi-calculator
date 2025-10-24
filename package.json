@@ -1,0 +1,25 @@
+{
+  "name": "serverless-roi-calculator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Serverless ROI Calculator - Full Stack Application",
+  "scripts": {
+    "dev": "pnpm --parallel -r dev",
+    "build": "pnpm -r build",
+    "test": "pnpm -r test",
+    "lint": "pnpm -r lint",
+    "clean": "pnpm -r clean && rm -rf node_modules"
+  },
+  "keywords": [
+    "monorepo",
+    "serverless",
+    "roi-calculator"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "packageManager": "pnpm@8.15.0"
+}
