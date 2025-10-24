@@ -1,0 +1,10 @@
+// Import variables and mixins
+@import './variables';
+@import './mixins';
+
+// Export for use in components
+:export {
+  primaryColor: $color-primary;
+  secondaryColor: $color-secondary;
+  containerMaxWidth: $container-max-width;
+}

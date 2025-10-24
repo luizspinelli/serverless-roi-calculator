@@ -1,11 +1,12 @@
-import './App.css'
+import { MainLayout } from '@/components'
+import { Home } from '@/pages'
+import './App.scss'
 
 function App() {
   return (
-    <div className="app">
-      <h1>Serverless ROI Calculator</h1>
-      <p>Welcome to the application</p>
-    </div>
+    <MainLayout>
+      <Home />
+    </MainLayout>
   )
 }
 

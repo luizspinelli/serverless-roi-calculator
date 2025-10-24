@@ -1,0 +1,20 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.footer {
+  background-color: $bg-secondary;
+  border-top: 1px solid $color-gray-200;
+  padding: $spacing-xl 0;
+  margin-top: auto;
+
+  &-container {
+    @include container;
+    text-align: center;
+  }
+
+  &-text {
+    color: $text-secondary;
+    font-size: $font-sm;
+    margin: $spacing-xs 0;
+  }
+}

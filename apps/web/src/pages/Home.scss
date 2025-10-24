@@ -1,0 +1,47 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.home {
+  max-width: 900px;
+  margin: 0 auto;
+
+  h1 {
+    font-size: $font-4xl;
+    color: $text-primary;
+    margin-bottom: $spacing-md;
+  }
+
+  > p {
+    font-size: $font-lg;
+    color: $text-secondary;
+    margin-bottom: $spacing-3xl;
+  }
+}
+
+.home-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: $spacing-lg;
+  margin-top: $spacing-xl;
+}
+
+.card {
+  @include card;
+  @include transition(box-shadow);
+
+  &:hover {
+    box-shadow: $shadow-md;
+  }
+
+  h3 {
+    color: $text-primary;
+    margin-bottom: $spacing-sm;
+    font-size: $font-xl;
+  }
+
+  p {
+    color: $text-secondary;
+    font-size: $font-sm;
+    line-height: 1.5;
+  }
+}
