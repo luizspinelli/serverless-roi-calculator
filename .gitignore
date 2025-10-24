@@ -102,5 +102,7 @@ yarn.lock
 docs/**/*.pdf
 docs/**/*.docx
 
+docs/
+
 # AI/BMAD artifacts (keep config, ignore some logs)
 .bmad-core/sessions/
